@@ -1,0 +1,9 @@
+{
+  "cases": [
+    { "name": "main-article-24", "records": 24, "landmark": true },
+    { "name": "plain-24", "records": 24, "landmark": false },
+    { "name": "main-article-500", "records": 500, "landmark": true },
+    { "name": "plain-500", "records": 500, "landmark": false }
+  ],
+  "tail": "Final field note: all 500 loaded entries remain available."
+}

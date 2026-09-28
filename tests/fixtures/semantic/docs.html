@@ -1,0 +1,15 @@
+<nav class="sidebar"><a href="/intro">Introduction</a><a href="/api">API</a></nav>
+<main>
+  <article>
+    <h1>Request options</h1>
+    <p>Use options to control a request.</p>
+    <h2>Example</h2>
+    <pre><code class="language-ts">const reply = await request({ retries: 2 });
+</code></pre>
+    <div class="note"><strong>Note:</strong> Retries only apply to transient errors.</div>
+    <h2>Parameters</h2>
+    <table><thead><tr><th>Name</th><th>Meaning</th></tr></thead><tbody><tr><td>retries</td><td>Number of retry attempts</td></tr></tbody></table>
+    <p>See the <a href="/reference/errors">error reference</a>.</p>
+  </article>
+</main>
+<footer><a href="/privacy">Privacy</a></footer>
