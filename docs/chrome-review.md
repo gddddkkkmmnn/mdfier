@@ -4,8 +4,8 @@ Release: **0.4.2 MVP**. Consult [verification](verification.md) for local accept
 
 ## Listing
 
-- **Name:** mdfier — Web to Markdown
-- **Summary:** Capture pages, selected blocks, and pasted content as editable Markdown. Preview, copy, or download locally.
+- **Name from the package:** mdfier
+- **Summary from the package:** Turn pages, selections and clipboard text into Markdown, locally.
 - **Single purpose:** Convert user-chosen web content into an editable Markdown document.
 - **Description:** Capture a loaded page, pick one block, save a text selection from its context menu, or paste copied content. Edit and preview the Markdown, copy it, or download a UTF-8 file. Keep separate working drafts for open tabs. English and Ukrainian interfaces. No account, AI service, analytics, or upload.
 - **Support:** https://github.com/gddddkkkmmnn/mdfier/issues
@@ -39,3 +39,7 @@ All executable code is bundled locally. No remote hosted code, external API, or 
 6. Submit after the dashboard disclosures, account verification and listing fields are complete. Store approval is a separate review and is not implied by a successful build.
 
 Official references: [program policies](https://developer.chrome.com/docs/webstore/program-policies/policies), [review process](https://developer.chrome.com/docs/webstore/review-process).
+
+## Marketplace status
+
+As of 29 September 2026, the 0.4.2 package is uploaded as draft item `lijohkibeolboenfibbehganjcllmlll`. The listing, genuine screenshots, promotional artwork, permission justifications, local data handling disclosures and reviewer instructions are saved. Submission awaits publisher contact-email verification. The draft is not submitted, approved or publicly installable from Chrome Web Store yet.
