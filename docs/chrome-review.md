@@ -15,6 +15,8 @@ Release: **0.4.2 MVP**. Consult [verification](verification.md) for local accept
 
 No user data is transmitted to the developer or a third party. Page contents and drafts are processed locally. Explain local draft storage accurately; do not imply that mdfier never reads page content.
 
+Disclose local handling of website content and the captured source URL, including deliberately pasted or edited content. Chrome requires disclosure even when information stays on the device. The public privacy policy includes the Limited Use statement. Match the dashboard's current category definitions to this behavior rather than declaring that the extension handles no data.
+
 | Permission | Justification |
 | --- | --- |
 | `<all_urls>` | User-invoked Page, Block, and Selection capture on ordinary websites, including when the sidebar is already open. |

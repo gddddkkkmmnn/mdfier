@@ -8,6 +8,12 @@ Exported Markdown includes the full source URL (including its query and fragment
 
 Preview sanitizes rendered Markdown. It does not execute imported HTML or fetch remote images. Page capture uses the loaded main-document DOM. Form values, hidden content, images, iframe contents, Shadow DOM, canvas, and media are excluded. Some web apps put useful content in unsupported embedded regions; mdfier warns when it detects those regions.
 
+## Chrome Web Store Limited Use
+
+mdfier's use of user data complies with the Chrome Web Store User Data Policy, including the Limited Use requirements. Website content, the source page URL and title, capture time, and content deliberately pasted or edited by the user are handled locally only to create, edit, preview, copy, and save the user's Markdown document. Local handling is still data handling; it does not mean the extension never reads website content.
+
+This information is not sold, transferred to the developer or third parties, used for advertising or profiling, or made available for the developer or other people to read. mdfier does not record a browsing-history log, use Chrome Storage Sync, or send captures to Google. The user decides whether to share an exported or copied document outside the extension.
+
 ## Firefox permissions
 
 | Permission | Why it is needed |
