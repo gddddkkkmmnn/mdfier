@@ -26,11 +26,11 @@ mdfier processes captures locally in Firefox. It does not send page content anyw
 
 **Category**
 
-Productivity (primary; confirm available AMO category on submission).
+Web Development (the closest available AMO category for the Markdown capture utility).
 
 **Tags/keywords**
 
-Markdown, clipper, web clipper, notes, export, page capture.
+AMO's current fixed tag list offers `download`; this relevant tag is selected. Markdown, capture and export are described in the listing copy.
 
 **Privacy policy URL**
 
@@ -57,6 +57,8 @@ Use the shipped 128px extension mark at `public/icons/128.png` as the source for
 > The extension is built with WXT and bundles/minifies local modules. Matching tracked source files, lockfile, tests, and build instructions are supplied in the source archive; generated files and untracked local files are excluded. Build with Node.js 24 and npm using `npm ci` followed by `npm run build`. No network requests are made by capture or conversion at runtime. The AMO validator reports `UNSAFE_VAR_ASSIGNMENT` for `innerHTML` in the following bounded cases: the panel shell uses fixed extension-owned markup; preview HTML is sanitized by DOMPurify with an explicit tag/attribute allowlist before insertion; Readability output is parsed in a detached document created from a visible-DOM snapshot that already excludes scripts, styles, form values, and unsupported embedded nodes. The rendered extension source and tests are included for review.
 >
 > Third-party source: Mozilla Readability 0.6.0: https://github.com/mozilla/readability/tree/0.6.0 ; Turndown: https://github.com/mixmark-io/turndown ; Turndown GFM: https://github.com/GerHobbelt/turndown-plugin-gfm ; Marked: https://github.com/markedjs/marked ; DOMPurify: https://github.com/cure53/DOMPurify . Exact package versions are in `package-lock.json`; license notices are included in the add-on archive.
+>
+> Matching source archive: https://github.com/gddddkkkmmnn/mdfier/releases/download/v0.4.2/mdfier-0.4.2-sources.zip . SHA-256: `f2d22abf6bc36cdafb38e30092d50fdd4f1682f93b2e64c93ab288a452d459cf`. A clean Node.js 24 / `npm ci` / `npm run build` rebuild reproduced every browser bundle file byte-for-byte.
 
 ## Build and upload
 
@@ -70,3 +72,7 @@ Use the shipped 128px extension mark at `public/icons/128.png` as the source for
 ## Verification status
 
 See the [verification record](verification.md) for automated, installed-browser and native OS evidence. A successful local release does not imply AMO approval.
+
+## Marketplace status
+
+As of 29 September 2026, AMO lists version 0.4.2 as **Awaiting Review**, with the slug `mdfier-web-to-markdown` and stable ID `mdfier@gddddkkkmmnn`. Its server validation passed with 0 errors and 7 disclosed warnings. Listing copy, MIT license, privacy text, support and repository links are saved. Reviewer notes include a direct link to the matching public source archive and its checksum. The archive and genuine product-page images still need to be attached through AMO's upload fields; the submission is not fully prepared for reviewer acceptance until those uploads are complete. Approval and public availability are pending.

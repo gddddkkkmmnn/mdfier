@@ -42,7 +42,7 @@ Genuine Firefox and Chrome screenshots are in `assets/screenshots/`. The Chrome 
 
 Browser ZIPs, matching reviewer source, SHA-256 checksums, icons, real screenshots, promotional artwork, privacy text and listing/reviewer notes are prepared. The public GitHub MVP release is available as [v0.4.2](https://github.com/gddddkkkmmnn/mdfier/releases/tag/v0.4.2).
 
-As of 29 September 2026, Chrome Web Store has a saved draft with the package, artwork, disclosures and reviewer instructions. Publisher contact-email verification remains before submission. Firefox submission is at the developer distribution agreement; its package has not yet been uploaded to AMO. Neither marketplace has approved this release. See [Chrome preparation](chrome-review.md) and [Firefox preparation](firefox-review.md) for the submission materials.
+As of 29 September 2026, Chrome Web Store item `lijohkibeolboenfibbehganjcllmlll` is submitted and awaiting review, with automatic publication after approval selected. Firefox AMO also shows **Awaiting Review** for 0.4.2 at `mdfier-web-to-markdown`; its server validator reported 0 errors and 7 disclosed warnings. The Firefox submission still needs its matching source archive and product-page images attached. Neither marketplace has approved this release. See [Chrome preparation](chrome-review.md) and [Firefox preparation](firefox-review.md) for the submission materials.
 
 ## Scope limits
 
