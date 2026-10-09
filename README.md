@@ -9,7 +9,7 @@
 
 mdfier turns web content into an editable Markdown document alongside the page. No account, AI service, analytics, or upload. Capture runs only when you ask for it.
 
-**0.4.2 is the first MVP release.** [Install mdfier from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/mdfier-web-to-markdown/). Mozilla approved the release on 2 October 2026. Chrome Web Store submission status is recorded in [Chrome submission notes](docs/chrome-review.md). Browser packages and matching source are also available from [GitHub Releases](https://github.com/gddddkkkmmnn/mdfier/releases/latest); those unsigned packages are for local developer installation. See the [verification record](docs/verification.md).
+**Install the first MVP release (0.4.2):** [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/mdfier-web-to-markdown/) · [Chrome Web Store](https://chromewebstore.google.com/detail/mdfier/lijohkibeolboenfibbehganjcllmlll). Both public listings were verified on 9 October 2026; Mozilla approved the release on 2 October. Browser packages and matching source are also available from [GitHub Releases](https://github.com/gddddkkkmmnn/mdfier/releases/latest); those unsigned packages are for local developer installation. See the [verification record](docs/verification.md).
 
 ## Capture what matters
 

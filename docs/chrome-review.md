@@ -42,6 +42,6 @@ Official references: [program policies](https://developer.chrome.com/docs/websto
 
 ## Marketplace status
 
-As of 29 September 2026, version 0.4.2 is submitted to Chrome Web Store as item `lijohkibeolboenfibbehganjcllmlll` and is awaiting review. The listing includes genuine screenshots, promotional artwork, permission justifications, local data handling disclosures and reviewer instructions. Automatic publication after approval is selected. Google warned that broad host permissions may require a longer review; their purpose is explained in the submission. Approval and a publicly installable store listing are still pending.
+Version **0.4.2 is published** at the [public Chrome Web Store listing](https://chromewebstore.google.com/detail/mdfier/lijohkibeolboenfibbehganjcllmlll), verified on 9 October 2026. The listing shows an update date of 1 October 2026; the exact approval date was not checked in the developer dashboard. The public card includes the genuine icon and screenshots, description, privacy disclosures and support link.
 
-On 9 October 2026, the developer dashboard requires a renewed Google sign-in. The current approval/publication state has not yet been verified; the submission state above is the last confirmed dashboard result.
+The release was submitted on 29 September 2026 with automatic publication after approval selected. Permission justifications, local data handling disclosures and reviewer instructions were supplied. The developer dashboard currently requests a renewed Google sign-in; this is not needed to verify the live public listing.
