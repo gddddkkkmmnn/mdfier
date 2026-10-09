@@ -11,7 +11,7 @@ The rule favors retaining useful page material when the structure is uncertain. 
 
 ## Implementation
 
-Mozilla Readability 0.6.0 is vendored locally under Apache-2.0. Its route is skipped for snapshots over 1,800 elements and structured content better handled by the conservative converter. Acceptance checks cover neighboring content branches as well as article headings and paragraphs. CSS names such as `profile`, `comments`, and `related` alone do not justify deleting text. See [vendor notes](../lib/vendor/README.md).
+Mozilla Readability 0.6.0 is vendored locally under Apache-2.0. Its route is skipped for snapshots over 1,800 elements and structured content better handled by the conservative converter. Acceptance checks cover neighboring content branches as well as article headings and paragraphs. CSS names such as `profile`, `comments`, and `related`, even together with a reply button, do not justify deleting authored text. Only control-only regions with no other text or a recognized sign-in prompt are removed; the check stops at 64 nodes or 160 text characters and preserves uncertain regions. See [vendor notes](../lib/vendor/README.md).
 
 Code blocks retain indentation and use a fence long enough to protect literal Markdown fences in the source. Capture work is bounded by the limits in `lib/capture-limits.ts`.
 
