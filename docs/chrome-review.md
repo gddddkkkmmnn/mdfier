@@ -43,3 +43,5 @@ Official references: [program policies](https://developer.chrome.com/docs/websto
 ## Marketplace status
 
 As of 29 September 2026, version 0.4.2 is submitted to Chrome Web Store as item `lijohkibeolboenfibbehganjcllmlll` and is awaiting review. The listing includes genuine screenshots, promotional artwork, permission justifications, local data handling disclosures and reviewer instructions. Automatic publication after approval is selected. Google warned that broad host permissions may require a longer review; their purpose is explained in the submission. Approval and a publicly installable store listing are still pending.
+
+On 9 October 2026, the developer dashboard requires a renewed Google sign-in. The current approval/publication state has not yet been verified; the submission state above is the last confirmed dashboard result.
