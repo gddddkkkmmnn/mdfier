@@ -22,6 +22,8 @@ mdfier turns web content into an editable Markdown document alongside the page. 
 
 Edit, preview, copy, or download a UTF-8 `.md` file. Each open tab has its own working draft. Captured pages include their source URL and capture date in the export. Drafts are temporary and cleared on browser restart; download anything you want to keep.
 
+The upcoming 0.4.3 update adds **Email**: open a compose draft in your configured mail handler with the document name as its subject and the Markdown export as its body. Long documents offer **Copy & open email** so you can paste the full text without truncation. No mail account connection is needed; mdfier never chooses a recipient or sends the email. This feature is not yet in the published 0.4.2 store release.
+
 ![mdfier in Firefox: documentation converted to Markdown preview](assets/screenshots/firefox-preview.png)
 
 ## Install locally

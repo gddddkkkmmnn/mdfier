@@ -2,6 +2,7 @@ import { exportIdentity } from '../../lib/export-identity';
 import { browser } from 'wxt/browser';
 import { convertCapture, renderExport, sanitizeFilename } from '../../lib/conversion';
 import { createImportedDraft } from '../../lib/import-capture';
+import { prepareEmailShare, shareEmail } from '../../lib/email-share';
 import { renderPreview } from '../../lib/preview';
 import { strings, type TextKey } from '../../lib/i18n';
 import type { CapturePayload, Draft, Settings } from '../../lib/types';
@@ -18,6 +19,9 @@ let importQueue: Promise<unknown> = Promise.resolve();
 let busy = false;
 let pickerActive = false;
 let clearing = false;
+let emailFallback = false;
+let emailSharing = false;
+let emailOperation = 0;
 let pasteAsNew = false;
 let initialized = false;
 let conflict = false;
@@ -74,6 +78,19 @@ function markChanged() {
   original = undefined;
   document.querySelector('#plain')?.setAttribute('hidden', '');
   persist();
+  updateEmailButton();
+}
+
+function updateEmailButton() {
+  const disabled = emailSharing || clearing || !draft?.markdown.trim();
+  document.querySelector<HTMLButtonElement>('#share-email')?.toggleAttribute('disabled', disabled);
+  document.querySelector<HTMLButtonElement>('#email-copy-open')?.toggleAttribute('disabled', disabled);
+}
+
+function resetEmailShare() {
+  emailOperation++;
+  emailSharing = false;
+  emailFallback = false;
 }
 
 function render() {
@@ -109,7 +126,12 @@ function render() {
     </main>
     <footer>
       <div class="export-actions" ${!hasDraft ? 'hidden' : ''}><button id="download" class="primary">↓ ${t('download')}</button><button id="copy" class="secondary">${t('copy')}</button></div>
+      <div id="email-fallback" class="email-fallback" role="group" aria-labelledby="email-hint" ${!hasDraft || !emailFallback ? 'hidden' : ''}>
+        <p id="email-hint">${t('emailLong')}</p>
+        <div class="email-fallback-actions"><button type="button" id="email-copy-open" class="secondary">${t('emailCopyOpen')}</button><button type="button" id="email-cancel" class="text-button">${t('cancel')}</button></div>
+      </div>
       <div class="footer-options">
+        <button type="button" id="share-email" class="email-button" title="${t('emailAction')}" aria-label="${t('emailAction')}" ${!hasDraft ? 'hidden' : ''}><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg><span>${t('email')}</span></button>
         <div class="language-picker" role="radiogroup" aria-label="${t('language')}">
           <button type="button" id="language-en" class="language-option" role="radio" aria-checked="${settings.language === 'en'}" title="English"><span>EN</span></button>
           <button type="button" id="language-uk" class="language-option" role="radio" aria-checked="${settings.language === 'uk'}" title="Українська"><span>UK</span></button>
@@ -219,6 +241,15 @@ function render() {
   });
   q<HTMLButtonElement>('#copy')?.addEventListener('click', () => void copy());
   q<HTMLButtonElement>('#download')?.addEventListener('click', () => void download());
+  q<HTMLButtonElement>('#share-email').onclick = () => void emailDocument();
+  q<HTMLButtonElement>('#email-copy-open').onclick = () => void emailDocument(true);
+  q<HTMLButtonElement>('#email-cancel').onclick = () => {
+    resetEmailShare();
+    q('#email-fallback').hidden = true;
+    updateEmailButton();
+    q('#share-email').focus();
+  };
+  updateEmailButton();
 }
 
 async function clearDocument() {
@@ -227,6 +258,8 @@ async function clearDocument() {
   clearing = true;
   document.querySelector<HTMLButtonElement>('#clear')?.setAttribute('disabled', '');
   documentEpoch++;
+  resetEmailShare();
+  updateEmailButton();
   try {
     await persistence;
     await importQueue;
@@ -235,6 +268,7 @@ async function clearDocument() {
     if (!result?.ok || ownerTabId !== tabId) throw new Error('clear-failed');
     draft = undefined;
     original = undefined;
+    resetEmailShare();
     pasteAsNew = false;
     currentView = 'markdown';
     conflict = false;
@@ -243,7 +277,7 @@ async function clearDocument() {
     render();
     requestAnimationFrame(() => document.querySelector<HTMLTextAreaElement>('#paste')?.focus());
   } catch { if (ownerTabId === tabId) status('storageFailed', true); }
-  finally { clearing = false; document.querySelector<HTMLButtonElement>('#clear')?.toggleAttribute('disabled', busy || pickerActive); }
+  finally { clearing = false; document.querySelector<HTMLButtonElement>('#clear')?.toggleAttribute('disabled', busy || pickerActive); updateEmailButton(); }
 }
 
 function warnText(code: string) {
@@ -259,6 +293,7 @@ async function reloadSaved() {
     conflict = false;
     pasteAsNew = false;
     original = undefined;
+    resetEmailShare();
     render();
   } catch { status('storageFailed', true); }
 }
@@ -293,6 +328,7 @@ async function importPayload(payload: CapturePayload, ownerTabId: number, import
   await persistence;
   if (ownerTabId !== tabId || importEpoch !== documentEpoch) return;
   draft = nextDraft;
+  resetEmailShare();
   original = payload.kind === 'paste' && payload.html && payload.text !== undefined ? payload : undefined;
   currentView = 'markdown';
   pasteAsNew = false;
@@ -356,6 +392,47 @@ async function download() {
   } catch { if (ownerTabId === tabId) status('downloadFailed', true); }
 }
 
+async function emailDocument(useClipboard = false) {
+  if (!draft?.markdown.trim() || tabId === undefined || clearing || emailSharing) return;
+  const ownerTabId = tabId;
+  const ownerEpoch = documentEpoch;
+  const snapshot = structuredClone(draft);
+  const share = prepareEmailShare(snapshot);
+  if (!useClipboard && !share.inlineUrl) {
+    emailFallback = true;
+    document.querySelector<HTMLElement>('#email-fallback')!.hidden = false;
+    document.querySelector<HTMLButtonElement>('#email-copy-open')!.focus();
+    return;
+  }
+  emailFallback = false;
+  document.querySelector<HTMLElement>('#email-fallback')!.hidden = true;
+  const operation = ++emailOperation;
+  const isCurrent = () => operation === emailOperation && ownerTabId === tabId && ownerEpoch === documentEpoch && draft?.id === snapshot.id;
+  emailSharing = true;
+  updateEmailButton();
+  try {
+    // Only Firefox declares optional data transmission for the mail handoff.
+    // Request from this click handler, before copying or opening another app.
+    const dataPermissions = browser.runtime.getManifest().browser_specific_settings?.gecko?.data_collection_permissions;
+    if (dataPermissions?.optional?.includes('websiteContent')) {
+      // WXT's shared Chrome types do not yet include Firefox's data_collection key.
+      const consent: Parameters<typeof browser.permissions.request>[0] & { data_collection: string[] } = { data_collection: ['websiteContent', 'browsingActivity'] };
+      const granted = await browser.permissions.request(consent);
+      if (!isCurrent()) return;
+      if (!granted) { status('emailPermission'); return; }
+    }
+    const result = await shareEmail(share, useClipboard ? 'clipboard' : 'inline', {
+      copy: text => navigator.clipboard.writeText(text),
+      open: url => browser.tabs.create({ url }),
+      isCurrent,
+    });
+    if (result === 'requested' && isCurrent()) status(useClipboard ? 'emailCopied' : 'emailOpening');
+  } catch { if (isCurrent()) status('emailFailed', true); }
+  finally {
+    if (operation === emailOperation) { emailSharing = false; updateEmailButton(); }
+  }
+}
+
 function consumePending(pending: PendingCapture) {
   if (pending.tabId !== tabId || pendingIds.has(pending.id) || clearing) return;
   if (!initialized) { deferredPending.push(pending); return; }
@@ -375,6 +452,7 @@ async function loadTab(nextTabId: number) {
   await importQueue;
   tabId = nextTabId;
   documentEpoch++;
+  resetEmailShare();
   draft = undefined;
   original = undefined;
   pasteAsNew = false;

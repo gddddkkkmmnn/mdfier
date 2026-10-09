@@ -1,7 +1,8 @@
 # Changelog
 
-## 0.4.3 — unreleased patch
+## 0.4.3 — unreleased update
 
+- Share the current Markdown export through a user-chosen email handler, with an explicit clipboard fallback for long documents. No account connection or automatic sending.
 - Preserve authored comments, related sections and profiles that contain reply controls; remove only control-only regions.
 - Replace stale capture handlers in already-open tabs after updating the extension.
 

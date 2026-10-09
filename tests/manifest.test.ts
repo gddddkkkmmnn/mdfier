@@ -28,5 +28,7 @@ describe('browser manifests', () => {
     expect(firefox).toHaveProperty('sidebar_action.default_panel', 'panel.html');
     expect(firefox).toHaveProperty('sidebar_action.default_title', 'm↓');
     expect(firefox).toHaveProperty('sidebar_action.default_icon.32', 'icons/32.png');
+    expect(firefox).toHaveProperty('browser_specific_settings.gecko.data_collection_permissions', { required: ['none'], optional: ['websiteContent', 'browsingActivity'] });
+    expect(chrome).not.toHaveProperty('browser_specific_settings');
   });
 });
