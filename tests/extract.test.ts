@@ -98,11 +98,39 @@ describe('visible DOM capture', () => {
     expect(result.text).toContain('Keep this linked warning');
     expect(result.text).not.toContain('Account settings');
   });
-  it('removes an ambiguous block only when it contains controls', () => {
+  it('removes a control-only ambiguous block', () => {
     document.body.innerHTML = '<main><h1>Report</h1><section class="comments"><p>Sign in to reply.</p><button>Reply</button></section><p>Keep this report.</p></main>';
     const result = extractCapture(document, 'page');
     expect(result.text).toContain('Keep this report');
     expect(result.text).not.toContain('Sign in to reply');
+  });
+  it('removes a Ukrainian sign-in prompt but keeps the adjacent short comment', () => {
+    document.body.innerHTML = '<main><h1>Звіт</h1><section class="comments"><p>Міст закритий.</p><button>Відповісти</button><div class="comments"><p>Увійдіть, щоб відповісти.</p><a href="/login">Увійти</a></div></section></main>';
+    const result = convertCapture(extractCapture(document, 'page')).markdown;
+    expect(result).toContain('Міст закритий.');
+    expect(result).not.toMatch(/Увійдіть|Увійти|Відповісти/);
+  });
+  it.each(['comments', 'related', 'user-profile'])('keeps authored content in %s even when it has a reply control', name => {
+    document.body.innerHTML = `<main><h1>Field report</h1><section class="${name}">
+      <h2>Participant note</h2><p>Consent withdrawn. Keep this note.</p>
+      <blockquote>The return route was blocked.</blockquote>
+      <div class="comments"><p>Sign in to reply.</p><button>Reply</button></div>
+      <button>Reply to this note</button></section><p>End of report.</p></main>`;
+    const result = convertCapture(extractCapture(document, 'page')).markdown;
+    expect(result).toContain('## Participant note');
+    expect(result).toContain('Consent withdrawn. Keep this note.');
+    expect(result).toContain('> The return route was blocked.');
+    expect(result).toContain('End of report.');
+    expect(result).not.toMatch(/Sign in to reply|Reply to this note/);
+  });
+  it('keeps every loaded comment in a long interactive section', () => {
+    document.body.innerHTML = '<main><h1>Discussion</h1><section class="comments">'
+      + Array.from({ length: 500 }, (_, index) => `<div><p>Loaded comment ${index}: keep this observation.</p><button>Reply</button></div>`).join('')
+      + '</section><p>End of discussion.</p></main>';
+    const result = convertCapture(extractCapture(document, 'page')).markdown;
+    expect([...result.matchAll(/Loaded comment (\d+):/g)].map(match => Number(match[1]))).toEqual(Array.from({ length: 500 }, (_, index) => index));
+    expect(result).toContain('End of discussion.');
+    expect(result).not.toContain('Reply');
   });
 });
 
@@ -341,12 +369,12 @@ describe('semantic Page capture', () => {
     document.body.innerHTML = '<main><h1>Code</h1><pre><code>-    preserve these spaces\n-\n\nend</code></pre></main>';
     expect(convertCapture(extractCapture(document, 'page')).markdown).toContain('-    preserve these spaces\n-\n\nend');
   });
-  it('keeps article structure while removing global chrome, calls to action, comments, and related links', () => {
+  it('keeps article structure and authored comments while removing chrome and controls', () => {
     const result = captureFixture('article');
     const markdown = convertCapture(result).markdown.trim();
     expect(markdown).toBe(fixture('article', 'md'));
     expect(result.extraction).toEqual({ mode: 'semantic-page', fallback: false });
-    expect(markdown).not.toMatch(/Example Magazine|Subscribe|Comments|Related story|Copyright/);
+    expect(markdown).not.toMatch(/Example Magazine|Subscribe|Reply|Show more|Copyright/);
   });
 
   it('keeps documentation headings, code, notes, tables, and reference links', () => {

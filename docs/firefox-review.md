@@ -76,3 +76,13 @@ See the [verification record](verification.md) for automated, installed-browser 
 ## Marketplace status
 
 On 9 October 2026, the AMO version editor confirms that version 0.4.2 was **Approved on 2 October 2026**, with the slug `mdfier-web-to-markdown` and stable ID `mdfier@gddddkkkmmnn`. The [public listing](https://addons.mozilla.org/en-US/firefox/addon/mdfier-web-to-markdown/) is available with the signed package `mdfier_web_to_markdown-0.4.2.xpi`. Its server validation passed with 0 errors and 7 disclosed warnings. Listing copy, MIT license, privacy text, support and repository links are saved. Reviewer notes include a direct link to the matching public source archive and its checksum. The matching archive and genuine product-page images still need to be attached through AMO's upload fields; approval does not remove the source-submission requirement.
+
+## Upcoming 0.4.3 update — not submitted
+
+Keep the 0.4.2 notes above as historical submission evidence. For 0.4.3, use the matching package/source archive and [patch verification](patch-0.4.3.md).
+
+Add to the listing: **Share the current Markdown document via Email. mdfier opens a compose draft in your configured mail app or webmail handler with the document name and exported text, including its source/date. Long documents offer Copy & open email for pasting the full text. No mail account connection, recipient selection, attachment or automatic sending.**
+
+Replace any blanket “no third-party transmission” statement: capture and conversion stay local, and no document is sent to the developer or a conversion server. The optional Email action hands the chosen document to the configured mail handler, which may autosave it according to the mail provider's own policy. Update the store dashboard privacy disclosures to match this behavior and the updated privacy policy. `clipboardWrite` also serves the explicit Copy & open email action.
+
+Firefox declares `required: ["none"]` and optional `websiteContent`/`browsingActivity` for Email. The action requests this consent before handoff. Check grant, refusal and revocation in a real Firefox profile; refusal must open no mail draft and retain the Markdown. Capture and local conversion do not require this optional consent. See [Mozilla built-in data consent](https://extensionworkshop.com/documentation/develop/firefox-builtin-data-consent/).

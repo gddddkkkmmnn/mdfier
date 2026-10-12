@@ -45,3 +45,11 @@ Official references: [program policies](https://developer.chrome.com/docs/websto
 Version **0.4.2 is published** at the [public Chrome Web Store listing](https://chromewebstore.google.com/detail/mdfier/lijohkibeolboenfibbehganjcllmlll), verified on 9 October 2026. The listing shows an update date of 1 October 2026; the exact approval date was not checked in the developer dashboard. The public card includes the genuine icon and screenshots, description, privacy disclosures and support link.
 
 The release was submitted on 29 September 2026 with automatic publication after approval selected. Permission justifications, local data handling disclosures and reviewer instructions were supplied. The developer dashboard currently requests a renewed Google sign-in; this is not needed to verify the live public listing.
+
+## Upcoming 0.4.3 update — not submitted
+
+Keep the 0.4.2 notes above as historical submission evidence. For 0.4.3, use the matching package/source archive and [patch verification](patch-0.4.3.md).
+
+Add to the listing: **Share the current Markdown document via Email. mdfier opens a compose draft in your configured mail app or webmail handler with the document name and exported text, including its source/date. Long documents offer Copy & open email for pasting the full text. No mail account connection, recipient selection, attachment or automatic sending.**
+
+Replace any blanket “no third-party transmission” statement: capture and conversion stay local, and no document is sent to the developer or a conversion server. The optional Email action hands the chosen document to the configured mail handler, which may autosave it according to the mail provider's own policy. Update the store dashboard privacy disclosures to match this behavior and the updated privacy policy. `clipboardWrite` also serves the explicit Copy & open email action.

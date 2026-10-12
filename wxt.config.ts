@@ -8,7 +8,7 @@ export default defineConfig({
   icons: { 16: 'icons/16.png', 32: 'icons/32.png', 48: 'icons/48.png', 128: 'icons/128.png' },
   action: { default_title: 'mdfier', default_icon: {16: 'icons/16.png',32:'icons/32.png'} },
   ...(browser === 'firefox'
-    ? { sidebar_action: { default_panel: 'panel.html', default_title: 'm↓', default_icon: { 16: 'icons/16.png', 32: 'icons/32.png', 48: 'icons/48.png' } }, browser_specific_settings: { gecko: { id: 'mdfier@gddddkkkmmnn', strict_min_version: '142.0', data_collection_permissions: { required: ['none'] } } } }
+    ? { sidebar_action: { default_panel: 'panel.html', default_title: 'm↓', default_icon: { 16: 'icons/16.png', 32: 'icons/32.png', 48: 'icons/48.png' } }, browser_specific_settings: { gecko: { id: 'mdfier@gddddkkkmmnn', strict_min_version: '142.0', data_collection_permissions: { required: ['none'], optional: ['websiteContent', 'browsingActivity'] } } } }
     : { minimum_chrome_version: '116', side_panel: { default_path: 'panel.html' } }),
  }),
 });

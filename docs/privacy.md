@@ -2,7 +2,9 @@
 
 mdfier captures page content only after the user chooses Page, Block, or the selection context-menu command. A paste event handles only content deliberately pasted by the user. The extension does not read the clipboard in the background.
 
-Page text, Markdown drafts, and preferences stay in the browser profile. Drafts are stored per open tab and cleared when the browser starts; language preferences remain. A one-time upgrade can move an older single draft into the active tab so it is not lost during migration. Copy and Download act only after the user selects those actions. No captured content or browsing history is transmitted. mdfier has no AI service, account, server, analytics, or remote conversion service.
+Page text, Markdown drafts, and preferences are processed in the browser profile. Drafts are stored per open tab and cleared when the browser starts; language preferences remain. A one-time upgrade can move an older single draft into the active tab so it is not lost during migration. Copy, Download and Email act only after the user selects those actions. No captured content or browsing history is transmitted to the mdfier developer or a conversion service. mdfier has no AI service, account, server, analytics, or remote conversion service.
+
+Email hands the current document name and Markdown export to the mail handler configured in the user's browser or operating system. That handler may be a desktop app or webmail service and may save its draft using its own account and privacy policy. mdfier does not connect to or read a mail account, choose a recipient, attach files or send a message. For long documents, it offers an explicit **Copy & open email** action; only after that action does it copy the full export to the clipboard and open a subject-only mail draft for manual pasting. The original mdfier draft remains available.
 
 Exported Markdown includes the full source URL (including its query and fragment when present) and capture time. Review or remove that metadata before sharing a document if the URL contains private information.
 
@@ -10,9 +12,9 @@ Preview sanitizes rendered Markdown. It does not execute imported HTML or fetch 
 
 ## Chrome Web Store Limited Use
 
-mdfier's use of user data complies with the Chrome Web Store User Data Policy, including the Limited Use requirements. Website content, the source page URL and title, capture time, and content deliberately pasted or edited by the user are handled locally only to create, edit, preview, copy, and save the user's Markdown document. Local handling is still data handling; it does not mean the extension never reads website content.
+mdfier's use of user data complies with the Chrome Web Store User Data Policy, including the Limited Use requirements. Website content, the source page URL and title, capture time, and content deliberately pasted or edited by the user are handled locally to create, edit, preview, copy, save or prepare the user's chosen email share. Local handling is still data handling; it does not mean the extension never reads website content.
 
-This information is not sold, transferred to the developer or third parties, used for advertising or profiling, or made available for the developer or other people to read. mdfier does not record a browsing-history log, use Chrome Storage Sync, or send captures to Google. The user decides whether to share an exported or copied document outside the extension.
+This information is not sold, transferred to the developer, used for advertising or profiling, or made available for the developer to read. mdfier does not record a browsing-history log or use Chrome Storage Sync. The user decides whether to share a document outside the extension through Copy, Download or Email; a chosen mail provider may receive the email draft content through that explicit handoff.
 
 ## Firefox permissions
 
@@ -23,8 +25,8 @@ This information is not sold, transferred to the developer or third parties, use
 | `storage` | Save tab drafts, pending capture routing, and language preference locally. |
 | `contextMenus` | Offer **Capture selection as Markdown** when text is selected. |
 | `downloads` | Save the Markdown file requested by the user and detect whether a download completed or was canceled. |
-| `clipboardWrite` | Copy Markdown after the user presses **Copy Markdown**. |
+| `clipboardWrite` | Copy Markdown after the user presses **Copy Markdown** or explicitly chooses **Copy & open email** for a long document. |
 
-Firefox's `data_collection_permissions` declares `required: ["none"]`. The host permission is broad because Page and Block must work across the sites the user chooses; protected browser pages remain unavailable. There is no clipboard-read permission.
+Firefox's `data_collection_permissions` declares `required: ["none"]` and optional `websiteContent` and `browsingActivity` for the document and source URL explicitly handed to email. Firefox asks for this optional consent when Email is invoked and lets the user revoke it in the extension settings. Refusal keeps the document and all local capture/edit/export features available. The host permission is broad because Page and Block must work across the sites the user chooses; protected browser pages remain unavailable. There is no clipboard-read permission.
 
 Uninstalling the extension or clearing browser-profile data can remove local drafts. Firefox's temporary developer installation is removed when the browser restarts.

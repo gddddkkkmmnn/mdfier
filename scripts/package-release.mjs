@@ -26,6 +26,7 @@ function assertManifest(path, browser) {
   if (browser === 'firefox' && !manifest.sidebar_action) throw new Error('Firefox sidebar is missing');
   if (!manifest.action || manifest.action.default_popup) throw new Error(`${browser} toolbar entry point is missing or intercepted by a popup`);
   if (browser === 'firefox' && (manifest.browser_specific_settings?.gecko?.id !== 'mdfier@gddddkkkmmnn' || !manifest.browser_specific_settings.gecko.data_collection_permissions?.required?.includes('none'))) throw new Error('Firefox identity or privacy declaration mismatch');
+  if (browser === 'firefox' && JSON.stringify(manifest.browser_specific_settings.gecko.data_collection_permissions.optional) !== JSON.stringify(['websiteContent', 'browsingActivity'])) throw new Error('Firefox optional email consent is missing');
 }
 
 function assertSharedFiles(chrome, firefox) {

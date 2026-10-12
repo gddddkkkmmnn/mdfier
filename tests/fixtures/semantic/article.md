@@ -12,3 +12,9 @@ Capture should preserve the useful argument rather than a site shell.
 > Readable structure matters.
 
 Read the [semantic capture guide](https://example.test/guides/semantic-capture).
+
+## Comments
+
+Great article
+
+[Related story](https://example.test/related)

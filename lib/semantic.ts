@@ -24,10 +24,9 @@ function chrome(element: Element) {
   if (SKIP_TAGS.has(element.tagName) || CHROME_TAGS.has(element.tagName)) return true;
   if (element.tagName === 'HEADER' && !element.closest('main,article,[role=main]')) return true;
   if (CHROME_ROLES.has((element.getAttribute('role') || '').toLowerCase()) || NOISE_HINT.test(hint(element))) return true;
-  // "profile", "comments" and "related" describe content just as often as
-  // controls.  A class name or short copy is never enough to remove them:
-  // require an actual control before treating an ambiguous block as chrome.
-  return AMBIGUOUS_HINT.test(hint(element)) && hasControl(element);
+  // A reply button inside a review does not make the review itself chrome.
+  // Discard ambiguous regions only when their text is entirely control UI.
+  return AMBIGUOUS_HINT.test(hint(element)) && controlOnlyRegion(element);
 }
 function readableText(element: Element): string {
   const parts: string[] = [];
@@ -81,9 +80,41 @@ function candidateKeepsArticle(candidate: ReadabilityCandidate, article: Element
   return sourceText.length >= total * 0.55;
 }
 
-function hasControl(element: Element): boolean {
-  if (element.querySelector('button,input,textarea,select,[role=button],[role=search]')) return true;
-  return Array.from(element.querySelectorAll('a')).some(link => /^(?:sign[ -]?in|log[ -]?in|reply|subscribe|show more|load more)$/i.test(words(link.textContent || '')));
+function controlOnlyRegion(element: Element): boolean {
+  let visited = 0;
+  let hasControl = false;
+  const text: string[] = [];
+  let characters = 0;
+  const action = /^(?:sign[ -]?in|log[ -]?in|reply|subscribe|show more|load more|увійти|відповісти|підписатися|показати більше|завантажити більше)$/i;
+  // Bound this cheap check independently of the page size. Large or uncertain
+  // regions survive and their descendants are cleaned by the normal snapshot.
+  const walker = element.ownerDocument.createTreeWalker(element, 5, {
+    acceptNode(node) {
+      if (++visited > 64) return 1;
+      if (node.nodeType !== 1) return 1;
+      const child = node as Element;
+      const linkText = child.tagName === 'A' && child.childNodes.length === 1 && child.firstChild?.nodeType === 3 ? child.firstChild.textContent || '' : '';
+      if (['BUTTON', 'INPUT', 'TEXTAREA', 'SELECT'].includes(child.tagName) || ['button', 'search'].includes(child.getAttribute('role') || '') || (linkText.length <= 40 && action.test(words(linkText)))) {
+        hasControl = true;
+        return 2; // Reject the whole control subtree, including its label/value.
+      }
+      return 1;
+    },
+  });
+  let node: Node | null;
+  while ((node = walker.nextNode())) {
+    if (visited > 64) return false;
+    if (node.nodeType !== 3) continue;
+    const raw = node.textContent || '';
+    if (raw.length > 160) return false;
+    const value = words(raw);
+    characters += value.length;
+    if (characters > 160) return false;
+    if (value) text.push(value);
+  }
+  if (!hasControl) return false;
+  const label = text.join(' ');
+  return !label || /^(?:(?:sign[ -]?in|log[ -]?in) to (?:reply|comment)|увійдіть,? щоб (?:відповісти|залишити коментар))[.!]?$/i.test(label);
 }
 
 function usefulOutsideSegment(element: Element): boolean {
