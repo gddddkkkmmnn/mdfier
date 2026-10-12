@@ -30,5 +30,6 @@ In each browser, capture a page containing a real comment with a reply button an
 - Chrome accepted the 0.4.3 package. The listing, single-purpose explanation, clipboard permission justification and reviewer test instructions were updated for Email. Submission confirmation and the developer dashboard show awaiting review; automatic publication after approval is enabled.
 - Firefox version `6567645`, signed file `5111782`, changed to **Approved** on 12 October. The public listing offers `mdfier_web_to_markdown-0.4.3.xpi` and shows the optional website-content/browsing-activity data declaration. Server validation passed with 0 errors and 7 disclosed innerHTML warnings.
 - Firefox listing/release/reviewer notes and its hosted privacy policy were updated. Matching source was uploaded in the submission flow and verified through the version editor’s **View current** source link. Source SHA-256: `317e44190287bcaef643548ae7835a852c35643511742a95a854a39b637fd075`.
+- The custom Firefox Add-ons icon was uploaded from `public/icons/128.png` and verified on the public listing. The signed 0.4.3 package was unchanged.
 
 The release archives remain tied to the tagged release commit; this subsequent status documentation does not replace those published assets or claim additional runtime tests.
