@@ -1,6 +1,6 @@
 # 0.4.3 release
 
-The previous published store version is 0.4.2. GitHub release and marketplace submission/approval are separate milestones; verify each store status before describing 0.4.3 as available there.
+The [GitHub release](https://github.com/gddddkkkmmnn/mdfier/releases/tag/v0.4.3) was published on 12 October 2026 from `fa8f637c56489e9eb7d7e9f03a1b0117252aa6cf`. Firefox 0.4.3 is approved and available on its public listing. Chrome 0.4.3 has been submitted and awaits review, with automatic publication after approval selected; Chrome’s public version remains 0.4.2 until then.
 
 ## Change
 
@@ -20,6 +20,15 @@ The capture protocol changes from 8 to 9 so the next capture after an extension 
 
 These automated and UI-fixture checks do not constitute installed-browser mail-handler acceptance. On 12 October 2026, the user reported that the local Firefox 0.4.3 extension appeared to work and requested release of the patch. This is a user-reported smoke check; the exact mail handler, short/long document cases and consent-revocation results were not individually recorded. The 0.4.2 browser checks in [verification](verification.md) remain historical evidence, not a run of 0.4.3.
 
-## Before store submission
+## Installed-browser acceptance checklist
 
 In each browser, capture a page containing a real comment with a reply button and confirm the text and quotes remain. Repeat after reloading the extension without reloading the website. Check a long loaded discussion, Page/Block/Selection, and Preview/Copy/Download. Check Email with a configured mail handler, including the long-document clipboard handoff and accepting, refusing and revoking Firefox optional data consent; do not send the test message. Upload the matching 0.4.3 browser ZIP and reviewer source; do not reuse the approved 0.4.2 package or its checksum. Update store copy and privacy disclosures to describe the explicit email handoff.
+
+## Marketplace evidence on 12 October 2026
+
+- PR #1 was squash-merged into main; the feature branch was removed. The release contains the Chrome/Firefox ZIPs, matching tracked source and SHA-256 record. Main CI passed.
+- Chrome accepted the 0.4.3 package. The listing, single-purpose explanation, clipboard permission justification and reviewer test instructions were updated for Email. Submission confirmation and the developer dashboard show awaiting review; automatic publication after approval is enabled.
+- Firefox version `6567645`, signed file `5111782`, changed to **Approved** on 12 October. The public listing offers `mdfier_web_to_markdown-0.4.3.xpi` and shows the optional website-content/browsing-activity data declaration. Server validation passed with 0 errors and 7 disclosed innerHTML warnings.
+- Firefox listing/release/reviewer notes and its hosted privacy policy were updated. Matching source was uploaded in the submission flow and verified through the version editor’s **View current** source link. Source SHA-256: `317e44190287bcaef643548ae7835a852c35643511742a95a854a39b637fd075`.
+
+The release archives remain tied to the tagged release commit; this subsequent status documentation does not replace those published assets or claim additional runtime tests.

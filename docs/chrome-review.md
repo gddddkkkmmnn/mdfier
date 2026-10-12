@@ -46,10 +46,12 @@ Version **0.4.2 is published** at the [public Chrome Web Store listing](https://
 
 The release was submitted on 29 September 2026 with automatic publication after approval selected. Permission justifications, local data handling disclosures and reviewer instructions were supplied. The developer dashboard currently requests a renewed Google sign-in; this is not needed to verify the live public listing.
 
-## Upcoming 0.4.3 update — not submitted
+## 0.4.3 update — submitted 12 October 2026
 
 Keep the 0.4.2 notes above as historical submission evidence. For 0.4.3, use the matching package/source archive and [patch verification](patch-0.4.3.md).
 
 Add to the listing: **Share the current Markdown document via Email. mdfier opens a compose draft in your configured mail app or webmail handler with the document name and exported text, including its source/date. Long documents offer Copy & open email for pasting the full text. No mail account connection, recipient selection, attachment or automatic sending.**
 
 Replace any blanket “no third-party transmission” statement: capture and conversion stay local, and no document is sent to the developer or a conversion server. The optional Email action hands the chosen document to the configured mail handler, which may autosave it according to the mail provider's own policy. Update the store dashboard privacy disclosures to match this behavior and the updated privacy policy. `clipboardWrite` also serves the explicit Copy & open email action.
+
+On 12 October 2026, Chrome accepted `mdfier-0.4.3-chrome.zip` and the update was submitted for review with automatic publication after approval selected. The dashboard confirmed **Awaiting review**. Listing copy, single-purpose and clipboard explanations, the public privacy-policy link and the 453-character reviewer instructions were checked/updated for Email. The public store version remains 0.4.2 until the update is approved. [Matching release](https://github.com/gddddkkkmmnn/mdfier/releases/tag/v0.4.3).
