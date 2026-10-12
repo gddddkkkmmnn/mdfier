@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.3 — unreleased update
+## 0.4.3 — 2026-10-12
 
 - Share the current Markdown export through a user-chosen email handler, with an explicit clipboard fallback for long documents. No account connection or automatic sending.
 - Preserve authored comments, related sections and profiles that contain reply controls; remove only control-only regions.

@@ -1,6 +1,6 @@
-# 0.4.3 patch candidate
+# 0.4.3 release
 
-The published MVP remains 0.4.2. This patch has not been submitted to either store.
+The previous published store version is 0.4.2. GitHub release and marketplace submission/approval are separate milestones; verify each store status before describing 0.4.3 as available there.
 
 ## Change
 
@@ -18,7 +18,7 @@ The capture protocol changes from 8 to 9 so the next capture after an extension 
 - Offline parser-lab keeps all 24/500 records, in order, in Page and Block, with and without main/article landmarks.
 - Release packaging checks shared panel and capture files for byte equality between Chrome and Firefox.
 
-These are automated/offline checks. Installed-browser acceptance for this patch is still pending; the 0.4.2 browser checks in [verification](verification.md) are historical evidence, not a run of 0.4.3.
+These automated and UI-fixture checks do not constitute installed-browser mail-handler acceptance. On 12 October 2026, the user reported that the local Firefox 0.4.3 extension appeared to work and requested release of the patch. This is a user-reported smoke check; the exact mail handler, short/long document cases and consent-revocation results were not individually recorded. The 0.4.2 browser checks in [verification](verification.md) remain historical evidence, not a run of 0.4.3.
 
 ## Before store submission
 
